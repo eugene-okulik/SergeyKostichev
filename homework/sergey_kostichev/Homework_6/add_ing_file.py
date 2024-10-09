@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     for word in text.split():
         if "," in word or "." in word:
-            word = word.replace(",", ing+",")
+            word = word.replace(",", ing + ",")
             word = word.replace(".", ing + ".")
         else:
             word += ing
