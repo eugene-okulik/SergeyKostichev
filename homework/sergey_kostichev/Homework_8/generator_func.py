@@ -1,9 +1,7 @@
 def fibonacci():
     a = 0
     b = 1
-    counter = 0
-    while counter < 100001:
-        counter += 1
+    while True:
         yield a + b
         a, b = b, a + b
 
@@ -14,3 +12,5 @@ for number in fibonacci():
     count += 1
     if count in keys:
         print(count, number)
+    if count == keys[-1]:
+        break
