@@ -1,5 +1,5 @@
 def repeat_me(func):
-    def wrapper(txt, count=1): # почему у меня не сработал *args как параметр? txt, count = args
+    def wrapper(txt, count=1):  # почему у меня не сработал *args как параметр? txt, count = args
         for t in range(count):
             func(txt)
     return wrapper
