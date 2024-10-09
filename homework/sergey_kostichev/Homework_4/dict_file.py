@@ -10,7 +10,7 @@ print(my_dict["tuple"][-1])
 my_dict["list"].append(7888)
 my_dict["list"].pop(1)
 
-my_dict["dict"]['i am a tuple'] = 'I am lying'
+my_dict["dict"][('i am a tuple',)] = 'I am lying'
 del my_dict["dict"]["three"]
 
 my_dict["set"].add(666)
