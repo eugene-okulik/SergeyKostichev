@@ -8,10 +8,9 @@ def fibonacci():
         a, b = b, a + b
 
 
-if __name__ == "__main__":
-    keys = [5, 200, 1000, 100000]
-    count = 1
-    for number in fibonacci():
-        count += 1
-        if count in keys:
-            print(count, number)
+keys = [5, 200, 1000, 100000]
+count = 1
+for number in fibonacci():
+    count += 1
+    if count in keys:
+        print(count, number)
