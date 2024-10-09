@@ -13,8 +13,8 @@ class Book:
         self.is_reserved = not self.is_reserved
 
     def show_info(self):
-        text = ("Name: " + self.book_name + ", Author: " + self.author +
-                ", Pages: " + str(self.pages_count) + ", Material: " + self.page_material)
+        text = (f"Name: {self.book_name}, Author: {self.author}, "
+                f"Pages: {self.pages_count}, Material: {self.page_material}")
         if self.is_reserved:
             text += ", reserved"
         print(text)
@@ -28,9 +28,9 @@ class SchoolBook(Book):
         self.is_task_exist = is_task_exist
 
     def show_info(self):
-        text = ("Name: " + self.book_name + ", Author: " + self.author +
-                ", Pages: " + str(self.pages_count) + ", Discipline: " + self.discipline +
-                ", Class: " + str(self.class_number))
+        text = (f"Name: {self.book_name}, Author: {self.author}, "
+                f"Pages: {self.pages_count}, Discipline: {self.discipline}, "
+                f"Class: {self.class_number}")
         if self.is_reserved:
             text += ", reserved"
         print(text)
