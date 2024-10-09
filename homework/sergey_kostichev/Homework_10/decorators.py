@@ -1,6 +1,6 @@
 def finish_me(func):
-    def wrapper(*txt):
-        func(*txt)
+    def wrapper(*args):
+        func(*args)
         print(f"finished")
     return wrapper
 
