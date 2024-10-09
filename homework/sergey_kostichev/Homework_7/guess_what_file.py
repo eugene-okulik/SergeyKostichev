@@ -16,9 +16,8 @@ def guess_number(number: int):
         print(template.format(user_answer, result))
 
 
-if __name__ == "__main__":
-    min_number, max_number = 1, 100
-    rand_number = random.randint(min_number, max_number)
+min_number, max_number = 1, 100
+rand_number = random.randint(min_number, max_number)
 
-    guess_number(rand_number)
-    print("Congratulations! You have guessed the number!")
+guess_number(rand_number)
+print("Congratulations! You have guessed the number!")
