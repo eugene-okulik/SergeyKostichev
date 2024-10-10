@@ -89,7 +89,6 @@ class Bouquet:
         template = self.__show_details()
         return f"This bouquet consists from {len(self.flowers)} flowers:\n" + template
 
-
     def __repr__(self):
         template = self.__show_details()
         return f"This bouquet consists from {len(self.flowers)} flowers:\n" + template
