@@ -1,0 +1,86 @@
+INSERT INTO students (name, second_name, group_id) VALUES ('Jorge', 'Kloun', 1981)
+
+INSERT INTO students (name, second_name, group_id) VALUES ('Morge', 'Broun', 1981)
+
+INSERT INTO students (name, second_name, group_id) VALUES ('Borge', 'Moun', 1981)
+
+INSERT INTO students (name, second_name, group_id) VALUES ('Dorge', 'Soun', 1981)
+
+INSERT INTO students (name, second_name, group_id) VALUES ('Michail', 'Somov', 1981)
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('English', 3121)
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('Biology', 3123)
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('Deutsch C1', 3124)
+
+INSERT INTO `groups` (title, start_date, end_date) VALUES ('Congenial Testers', 'Oct 2023', 'Feb 2024')
+
+INSERT INTO subjets (title) VALUES ('Mathematics')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Lesson Basics', 1862)
+
+INSERT INTO lessons (title, subject_id) VALUES ('Lesson Advanced', 1862)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (8, 1862, 5871)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (8, 1862, 5871)
+
+INSERT INTO subjets (title) VALUES ('Physics')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Lesson Optics', 1863)
+
+INSERT INTO lessons (title, subject_id) VALUES ('Lesson Thermodynamics', 1863)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (9.9, 1863, 3124)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (8.8, 1863, 3124)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (8, 1862, 5873)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (7, 1862, 5874)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (9, 1862, 5873)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (9.5, 1862, 5874)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (5, 1862, 3124)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (7, 1862, 3124)
+
+INSERT INTO subjets (title) VALUES ('Spanish')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Spanish B1', 1864)
+
+INSERT INTO lessons (title, subject_id) VALUES ('Spanish B2', 1864)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (10, 1864, 3124)
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES (8, 1864, 3124)
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('Physics', 3120)
+
+-- INSERT INTO books (title, taken_by_student_id)
+
+SELECT * FROM students JOIN lessons l WHERE group_id = 1981 AND subject_id = 1864
+
+UPDATE students SET name = 'Sergey' WHERE id = 3124
+
+DELETE FROM students WHERE id = 3122
+
+DELETE FROM students WHERE id = 3126
+
+DELETE FROM students WHERE id = 3120
+
+SELECT * FROM marks m WHERE m.student_id = 3124
+
+SELECT * FROM books b WHERE b.taken_by_student_id = 3124
+
+SELECT *
+FROM students s
+JOIN marks m ON m.student_id = 3124
+JOIN books b ON b.taken_by_student_id = 3124
+JOIN `groups` g ON g.id = 1981
+JOIN lessons l ON m.lesson_id = l.id
+JOIN subjets s2 ON l.subject_id = s2.id
+WHERE s.id = 3124
