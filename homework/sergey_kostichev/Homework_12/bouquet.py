@@ -54,15 +54,37 @@ class Bouquet:
     def sort_by_color(self):
         self.flowers.sort(key=lambda flower: flower.color, reverse=True)
 
-    def search_flower(self): # поиск цветов в букете по каким-нибудь параметрам (например, по среднему времени жизни)
-        ...
+    def find_by_color(self, color):
+        found_flowers = []
 
+        for flower in self.flowers:
+            if flower.color == color:
+                found_flowers.append(flower)
+
+        if len(found_flowers) > 0:
+            flowers_txt = ", ".join([flower.name for flower in found_flowers])
+            print("There are", len(found_flowers), color, "flowers in the bouquet: ", flowers_txt)
+        else:
+            print("There are no", color, "flowers in the bouquet")
+
+    def find_by_price(self, price):
+        found_flowers = []
+        for flower in self.flowers:
+            if flower.price <= price:
+                found_flowers.append(flower)
+
+        if len(found_flowers) > 0:
+            flowers_txt = ", ".join([f"{flower.name} {flower.price}$" for flower in found_flowers])
+            print(f"There are {len(found_flowers)} flowers in the bouquet with under {price}: {flowers_txt}")
+        else:
+            print(f"There are no flowers in the bouquet with such price")
 
     def __show_details(self):
         text = ""
         for flower in self.flowers:
             text += str(flower) + "\n"
-        return text
+        average_lifetime = f"The average lifetime of this beautiful bouquet is {self.__lifetime} days.\n"
+        return text + average_lifetime
 
     def __str__(self):
         template = self.__show_details()

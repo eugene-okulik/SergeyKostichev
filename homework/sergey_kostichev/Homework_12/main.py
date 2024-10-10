@@ -18,11 +18,9 @@ if __name__ == "__main__":
     # print(dand1)
     # print(dand2)
 
-    bouquet1 = Bouquet(dand1, rose2, daisy1)
-    # print("Price", bouquet1.price)
-    # print("Lifetime", bouquet1.lifetime)
-
+    bouquet1 = Bouquet(dand1, rose1, daisy2)
     print(bouquet1)
+
     bouquet1.sort_by_price()
     print(bouquet1)
     bouquet1.sort_by_length()
@@ -31,3 +29,9 @@ if __name__ == "__main__":
     print(bouquet1)
     bouquet1.sort_by_fresh()
     print(bouquet1)
+
+    bouquet1.find_by_color("yellow")
+    bouquet1.find_by_color("red")
+
+    bouquet1.find_by_price(3)
+    bouquet1.find_by_price(0.1)

@@ -34,21 +34,6 @@ class Flower:
         return (f'{self.color} {self.name} is {self.stem_length} cm long, '
               f'its lifetime reaches up to {self.lifetime}. It costs {self.price}$.').capitalize()
 
-    def __lt__(self, other):
-        ...
-
-    def __le__(self, other):
-        ...
-
-    def __eq__(self, other):
-        ...
-
-    def __gt__(self, other):
-        ...
-
-    def __ge__(self, other):
-        ...
-
 
 class Daisy(Flower):
 
@@ -87,7 +72,7 @@ class Rose(Flower):
 
 class Anduwanchik(Flower):
     def __init__(self, color, length, lifetime, price, is_fluffy):
-        self.__name = "Rose"
+        self.__name = "Dandelion"
         super().__init__(self.__name, color, length, lifetime, price)
         self.is_fluffy = is_fluffy
 
