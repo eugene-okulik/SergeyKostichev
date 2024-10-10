@@ -7,26 +7,39 @@ base_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 file_path = os.path.join(base_path, 'eugene_okulik', 'hw_13', file_name)
 
 
+def give_answer(func):
+    def wrapper(*args):
+        print("Answer: ", end="")
+        func(*args)
+        print()
+    return wrapper
+
+
 def read_datafile(path):
     with open(path, 'r', encoding='utf-8') as data_file:
         for line in data_file.readlines():
+            if '\n' not in line:
+                line += '\n'
             print(line)
             yield line
 
 
+@give_answer
 def print_date_week_later(dat):
     new_date = dat + datetime.timedelta(days=7)
-    print("Answer:", new_date, "\n")
+    print(new_date)
 
 
+@give_answer
 def print_day_of_week(dat):
     day_of_week = dat.strftime('%A')
-    print("Answer:", day_of_week, "\n")
+    print(day_of_week)
 
 
+@give_answer
 def print_how_many_days_ago(dat):
     days_ago = (datetime.datetime.now() - dat).days
-    print("\nAnswer:", days_ago)
+    print(days_ago)
 
 
 for data_line in read_datafile(file_path):
