@@ -16,7 +16,6 @@ class Bouquet:
         self.__price = self.__give_price()
         self.__lifetime = self.__define_expiration()
 
-
     @property
     def price(self):
         return self.__price
@@ -31,20 +30,20 @@ class Bouquet:
             sum += flower.price
         return round(sum, 2)
 
-    def __define_expiration(self): # определяет время его увядания по среднему времени жизни всех цветов в букете.
+    def __define_expiration(self):  # определяет время его увядания по среднему времени жизни всех цветов в букете.
         expiration_time = 0
         for flower in self.flowers:
             expiration_time += flower.lifetime
         expiration_time = expiration_time / len(self.flowers)
-        return  round(expiration_time)
+        return round(expiration_time)
 
     @decor("lifetime")
     def sort_by_fresh(self):
-       self.flowers.sort(key=lambda flower: flower.lifetime, reverse=True)
+        self.flowers.sort(key=lambda flower: flower.lifetime, reverse=True)
 
     @decor("price")
     def sort_by_price(self):
-       self.flowers.sort(key=lambda flower: flower.price, reverse=True)
+        self.flowers.sort(key=lambda flower: flower.price, reverse=True)
 
     @decor("length")
     def sort_by_length(self):
@@ -77,7 +76,7 @@ class Bouquet:
             flowers_txt = ", ".join([f"{flower.name} {flower.price}$" for flower in found_flowers])
             print(f"There are {len(found_flowers)} flowers in the bouquet with under {price}: {flowers_txt}")
         else:
-            print(f"There are no flowers in the bouquet with such price")
+            print("There are no flowers in the bouquet with such price")
 
     def __show_details(self):
         text = ""
@@ -92,4 +91,5 @@ class Bouquet:
 
 
     def __repr__(self):
-        return ""
+        template = self.__show_details()
+        return f"This bouquet consists from {len(self.flowers)} flowers:\n" + template

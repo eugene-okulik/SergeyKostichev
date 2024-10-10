@@ -27,12 +27,12 @@ class Flower:
         return self.__name
 
     def __str__(self):
-        return(f'{self.color} {self.name} is {self.stem_length} cm long, '
-              f'its lifetime reaches up to {self.lifetime} days. It costs {self.price}$.').capitalize()
+        return (f'{self.color} {self.name} is {self.stem_length} cm long, '
+                f'its lifetime reaches up to {self.lifetime} days. It costs {self.price}$.').capitalize()
 
     def __repr__(self):
         return (f'{self.color} {self.name} is {self.stem_length} cm long, '
-              f'its lifetime reaches up to {self.lifetime}. It costs {self.price}$.').capitalize()
+                f'its lifetime reaches up to {self.lifetime}. It costs {self.price}$.').capitalize()
 
 
 class Daisy(Flower):
@@ -44,12 +44,12 @@ class Daisy(Flower):
 
     def __str__(self):
         if self.is_fresh:
-            return super().__str__() + f' This flower is fresh.'
+            return super().__str__() + ' This flower is fresh.'
         return super().__str__()
 
     def __repr__(self):
         if self.is_fresh:
-            return super().__repr__() + f' This flower is fresh.'
+            return super().__repr__() + ' This flower is fresh.'
         return super().__repr__()
 
 
@@ -61,12 +61,12 @@ class Rose(Flower):
 
     def __str__(self):
         if self.is_spiky:
-            return super().__str__() + f' This flower has thorns.'
+            return super().__str__() + ' This flower has thorns.'
         return super().__str__()
 
     def __repr__(self):
         if self.is_spiky:
-            return super().__repr__() + f' This flower has thorns.'
+            return super().__repr__() + ' This flower has thorns.'
         return super().__repr__()
 
 
@@ -78,11 +78,10 @@ class Anduwanchik(Flower):
 
     def __str__(self):
         if self.is_fluffy:
-            return super().__str__() + f' This flower is already fluffy.'
+            return super().__str__() + ' This flower is already fluffy.'
         return super().__str__()
 
     def __repr__(self):
         if self.is_fluffy:
-            return super().__repr__() + f' This flower is already fluffy.'
+            return super().__repr__() + ' This flower is already fluffy.'
         return super().__repr__()
-
