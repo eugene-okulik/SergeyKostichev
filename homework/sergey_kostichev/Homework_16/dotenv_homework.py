@@ -3,9 +3,7 @@ import credentials
 import os
 import dotenv
 
-dotenv.load_dotenv()
-
-print(os.getenv('DB_USER'), os.getenv('DB_PASSW'))
+dotenv.load_dotenv(override=True)
 
 db = mysql.connect(
     user=os.getenv('DB_USER'),
