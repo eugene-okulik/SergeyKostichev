@@ -21,12 +21,12 @@ if __name__ == "__main__":
 
     query_template = '''
                     SELECT *
-                    FROM students s 
+                    FROM students s
                     JOIN `groups` g ON g.id = s.group_id
                     JOIN books b ON b.taken_by_student_id = s.id
                     JOIN marks m ON m.student_id = s.id
                     JOIN lessons l ON l.id = m.lesson_id
-                    JOIN subjets s2 ON l.subject_id = s2.id 
+                    JOIN subjets s2 ON l.subject_id = s2.id
                     WHERE s.name = '{0}' AND s.second_name = '{1}'
                     AND g.title = '{2}' AND b.title = '{3}'
                     AND s2.title = '{4}' AND l.title = '{5}'
