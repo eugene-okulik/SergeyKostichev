@@ -27,10 +27,10 @@ if __name__ == "__main__":
                     JOIN marks m ON m.student_id = s.id
                     JOIN lessons l ON l.id = m.lesson_id
                     JOIN subjets s2 ON l.subject_id = s2.id
-                    WHERE s.name = '{0}' AND s.second_name = '{1}'
-                    AND g.title = '{2}' AND b.title = '{3}'
-                    AND s2.title = '{4}' AND l.title = '{5}'
-                    AND m.value = '{6}'
+                    WHERE s.name = %s AND s.second_name = %s
+                    AND g.title = %s AND b.title = %s
+                    AND s2.title = %s AND l.title = %s
+                    AND m.value = %s
                 '''
 
     for index in range(1, len(datas)):
@@ -43,10 +43,10 @@ if __name__ == "__main__":
         lesson_title = line[5]
         mark_value = line[6]
 
-        query = query_template.format(name, second_name, group_title, book_title,
-                                      subject_title, lesson_title, mark_value)
+        values = (name, second_name, group_title, book_title,
+                  subject_title, lesson_title, mark_value)
 
-        result = db.find_by_query(query)
+        result = db.find_by_query(query_template, values)
         if len(result) == 0:
             print(line)
 

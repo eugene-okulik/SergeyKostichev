@@ -24,6 +24,6 @@ class SQLConnection:
     def get_connection(self):
         return self.db
 
-    def find_by_query(self, query):
-        self.cursor.execute(query)
+    def find_by_query(self, query, values):
+        self.cursor.execute(query, values)
         return self.cursor.fetchall()
