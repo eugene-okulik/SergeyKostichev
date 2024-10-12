@@ -1,4 +1,5 @@
 import mysql.connector as mysql
+from faker import Faker
 
 db = mysql.connect(
     user='st-onl',
@@ -10,22 +11,35 @@ db = mysql.connect(
 
 cursor = db.cursor()
 
+fake = Faker()
+
+num_students = 5
+
+students = []
+for _ in range(num_students):
+    name = fake.first_name()
+    second_name = fake.last_name()
+    students.append((name, second_name))
+
+insert_student = "INSERT INTO students (name, second_name) VALUES (%s, %s)"
+for student in students:
+    cursor.execute(insert_student, student)
+
 query = "INSERT INTO `groups` (title, start_date, end_date) VALUES (%s, %s, %s)"
 values = ('Autopython Video Course', 'October 2024', 'October 2124')
 cursor.execute(query, values)
 current_group_id = cursor.lastrowid
 
-students = [
-    ('Sasha', 'Lisunova', current_group_id),
-    ('Masha', 'Borodinova', current_group_id),
-    ('Dasha', 'Prjevalskaya', current_group_id),
-    ('Glasha', 'Miroslavskaya', current_group_id),
-    ('Cheburasha', 'Mandarinova', current_group_id),
-]
+update_student_group = "UPDATE students SET group_id = %s WHERE id = %s"
+for student in students:
+    student_name = student[0]
+    cursor.execute("SELECT id FROM students WHERE name = %s AND second_name = %s",
+                   (student_name, student[1]))
+    student_id = cursor.fetchone()[0]
+    cursor.execute(update_student_group, (current_group_id, student_id))
+db.commit()
 
-insert_student = "INSERT INTO students (name, second_name, group_id) VALUES (%s, %s, %s)"
 student_ids = []
-
 for student in students:
     cursor.execute(insert_student, student)
     student_ids.append(cursor.lastrowid)
