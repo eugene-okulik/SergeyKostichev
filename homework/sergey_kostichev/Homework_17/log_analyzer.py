@@ -55,7 +55,7 @@ def find_text_in_logs(log_files, keytext, size, short=False):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("path", help="absolute path to Logs directory")
-parser.add_argument("-t", "--text", help="searching text in Logs")
+parser.add_argument("-t", "--text", help="key text should be searched in Logs")
 parser.add_argument("-s", "--size", type=int, default=5, help="size of line to display")
 parser.add_argument("--short", help="display the first found request", action="store_true")
 args = parser.parse_args()
