@@ -53,7 +53,6 @@ def find_text_in_logs(log_files, keytext, size, short=False):
     return result_logs
 
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument("path", help="absolute path to Logs directory")
 parser.add_argument("-t", "--text", help="searching text in Logs")
