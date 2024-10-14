@@ -19,9 +19,9 @@ students = []
 for _ in range(num_students):
     name = fake.first_name()
     second_name = fake.last_name()
-    students.append((name, second_name))
+    students.append((name, second_name, None))
 
-insert_student = "INSERT INTO students (name, second_name) VALUES (%s, %s)"
+insert_student = "INSERT INTO students (name, second_name, group_id) VALUES (%s, %s, %s)"
 for student in students:
     cursor.execute(insert_student, student)
 
