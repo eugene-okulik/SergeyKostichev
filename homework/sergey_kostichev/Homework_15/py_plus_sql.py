@@ -24,25 +24,25 @@ for _ in range(num_students):
     second_name = fake.last_name()
     students.append((name, second_name, None))
 
-#1. Добавляю студентов без айди группы
+# 1. Добавляю студентов без айди группы
 insert_student = "INSERT INTO students (name, second_name, group_id) VALUES (%s, %s, %s)"
 for student in students:
     cursor.execute(insert_student, student)
     student_ids.append(cursor.lastrowid)
 
-#2. Добавляю группу и сохраняю айди созданной группы
+# 2. Добавляю группу и сохраняю айди созданной группы
 query = "INSERT INTO `groups` (title, start_date, end_date) VALUES (%s, %s, %s)"
 values = ('Autopython Video Course', 'Oct 2024', 'Осt 2124')
 cursor.execute(query, values)
 current_group_id = cursor.lastrowid
 
-#3. Добавляю всех студентов в эту новую группу, используя сохраненные айди группы и айди студентов
+# 3. Добавляю всех студентов в эту новую группу, используя сохраненные айди группы и айди студентов
 update_student_group = "UPDATE students SET group_id = %s WHERE id = %s"
 for student in student_ids:
     cursor.execute(update_student_group, (current_group_id, student))
 db.commit()
 
-#4. Назначаю книги студентам по их айди
+# 4. Назначаю книги студентам по их айди
 book_ids = []
 for student_id_ in student_ids:
     books = [
@@ -56,7 +56,7 @@ for student_id_ in student_ids:
         cursor.execute(insert_book, book)
         book_ids.append(cursor.lastrowid)
 
-#5. Добавляю предметы
+# 5. Добавляю предметы
 insert_subjet = "INSERT INTO subjets (title) VALUES (%s)"
 subjet_ids = []
 
@@ -65,7 +65,7 @@ for subject in subjets:
     cursor.execute(insert_subjet, (subject,))
     subjet_ids.append(cursor.lastrowid)
 
-#5. Добавляю уроки
+# 5. Добавляю уроки
 lessons = [
     ('Lesson Basics', subjet_ids[0]),
     ('Lesson Advanced', subjet_ids[0]),
@@ -75,14 +75,14 @@ lessons = [
     ('Spanish B2', subjet_ids[2]),
 ]
 
-#6. Распределяю уроки по предметам
+# 6. Распределяю уроки по предметам
 insert_lesson = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
 lesson_ids = []
 for lesson in lessons:
     cursor.execute(insert_lesson, lesson)
     lesson_ids.append(cursor.lastrowid)
 
-#7. Добавляю оценки используя айди уроков и студентов
+# 7. Добавляю оценки используя айди уроков и студентов
 marks = []
 for student in student_ids:
     for lesson in lesson_ids:
