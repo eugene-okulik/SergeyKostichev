@@ -1,10 +1,48 @@
-import requests
+import allure
+import pytest
 
-url = 'http://167.172.172.115:52353/'
+
+@allure.feature('Experiments')
+@allure.story('Equals')
+@allure.title('Сравнение переменной с 1')
+@pytest.mark.experiment
+def test_experiment_1():
+    var = 2
+    assert 1 == var, f"1 is not equal {var}"
 
 
-def test_get_object(response):
-    template = f'{url}/object/{response.json()["id"]}'
-    response = requests.get(template)
-    assert response.status_code == 200, "Page didn't answer"
-    assert len(response.json()) == 3, "Page structure is correct"
+@allure.feature('Experiments')
+@allure.story('Equals')
+@allure.title('Сравнение переменной с 100')
+@pytest.mark.experiment
+def test_experiment_2():
+    var = 100
+    assert 100 == var, f"100 is not equal {var}"
+
+
+@allure.feature('Experiments')
+@allure.story('Equals')
+@allure.title('Сравнение переменной с 1000')
+@pytest.mark.experiment
+def test_experiment_3():
+    var = 1000
+    assert 1000 == var, f"1000 is not equal {var}"
+
+
+@allure.feature('Experiments')
+@allure.story('Print')
+@allure.title('Вывод переменной')
+@pytest.mark.experiment
+def test_print():
+    var = 1
+    print(var)
+
+
+@allure.feature('Experiments')
+@allure.story('Print')
+@allure.title('Сравнение переменной после вычисления')
+@pytest.mark.experiment
+def test_print_2():
+    var = 100
+    var = 100 / 2 * 3 + 5
+    print(var)
