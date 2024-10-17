@@ -1,9 +1,9 @@
 import allure
 import requests
-from test_api_skostichev.endpoints.endpoints import Endpoint
+from test_api_skostichev.endpoints.endpoint import Endpoint
 
 
-class GETMethod(Endpoint):
+class GetObject(Endpoint):
     @allure.step('Retrieve an object using GET method')
     def get_object(self, test_object):
         self.response = requests.get(f'{self.url}/object/{test_object.json()["id"]}')
@@ -22,7 +22,7 @@ class GETMethod(Endpoint):
     def check_response_values(self, expected_data):
         response_json = self.response.json()
         for key, expected_value in expected_data.items():
-            assert response_json[key] == expected_value, f"Actual value of '{key}' is '{response_json[key]}'"
+            assert response_json[key] == expected_value, f"Value of '{key}' is wrong: '{response_json[key]}'"
 
     @allure.step('Check response structure')
     def check_response_structure(self, expected_keys):
@@ -33,3 +33,7 @@ class GETMethod(Endpoint):
     @allure.step('Check response time')
     def check_response_time(self, max_time):
         assert self.response.elapsed.total_seconds() < max_time, "Response took too much time"
+
+    @allure.step("Deleting object")
+    def delete_object(self, object_id):
+        requests.delete(f"{self.url}/object/{object_id}")
