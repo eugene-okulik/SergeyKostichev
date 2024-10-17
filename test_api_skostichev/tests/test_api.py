@@ -40,47 +40,43 @@ def test_post_with_negative_data(create_post_endpoint, data):
     create_post_endpoint.delete_object(create_post_endpoint.response)
 
 
-@allure.feature('Update Object')
 @pytest.mark.parametrize('data', TEST_DATA)
+@allure.feature('Update Object')
 @allure.story('Valid Object Update')
 @allure.title('Test PUT object update with valid data')
-def test_put_object(create_test_response, create_put_endpoint, data):
-    create_put_endpoint.change_object(create_test_response, data=data)
-    create_put_endpoint.check_success()
-    create_put_endpoint.check_response_name_is_correct(data)
-    create_put_endpoint.check_response_structure(EXPECTED_KEYS)
-    create_put_endpoint.check_specific_parameter('name', data['name'])
-    create_put_endpoint.check_response_time(max_time=2)
+def test_put_object(create_test_response, update_object_endpoint, data):
+    update_object_endpoint.put_object(create_test_response, data=data)
+    update_object_endpoint.check_success()
+    update_object_endpoint.check_response_name_is_correct(data)
+    update_object_endpoint.check_response_structure(EXPECTED_KEYS)
+    update_object_endpoint.check_specific_parameter('name', data['name'])
+    update_object_endpoint.check_response_time(max_time=2)
 
-
-@allure.feature('Update Object')
 @pytest.mark.parametrize('data', NEGATIVE_DATA)
+@allure.feature('Update Object')
 @allure.story('Invalid Object Update')
 @allure.title('Test PUT object update with negative data')
-def test_put_object_with_negative_data(create_test_response, create_put_endpoint, data):
-    create_put_endpoint.check_negative_data(data)
+def test_put_object_with_negative_data(create_test_response, update_object_endpoint, data):
+    update_object_endpoint.check_negative_data(data=data, method='PUT')
 
-
-@allure.feature('Update Object')
 @pytest.mark.parametrize('data', TEST_DATA)
+@allure.feature('Update Object')
 @allure.story('Valid Object Partial Update')
 @allure.title('Test PATCH object update with valid data')
-def test_patch_object(create_test_response, create_patch_endpoint, data):
-    create_patch_endpoint.change_object(create_test_response, data=data)
-    create_patch_endpoint.check_success()
-    create_patch_endpoint.check_response_name_is_correct(data)
-    create_patch_endpoint.check_response_structure(EXPECTED_KEYS)
-    create_patch_endpoint.check_specific_parameter('name', data['name'])
-    create_patch_endpoint.check_response_time(max_time=2)
+def test_patch_object(create_test_response, update_object_endpoint, data):
+    update_object_endpoint.patch_object(create_test_response, data=data)
+    update_object_endpoint.check_success()
+    update_object_endpoint.check_response_name_is_correct(data)
+    update_object_endpoint.check_response_structure(EXPECTED_KEYS)
+    update_object_endpoint.check_specific_parameter('name', data['name'])
+    update_object_endpoint.check_response_time(max_time=2)
 
-
-@allure.feature('Update Object')
 @pytest.mark.parametrize('data', NEGATIVE_DATA)
+@allure.feature('Update Object')
 @allure.story('Invalid Object Partial Update')
 @allure.title('Test PATCH object update with negative data')
-def test_patch_with_negative_data(create_test_response, create_patch_endpoint, data):
-    create_patch_endpoint.change_object(create_test_response, data=data)
-    create_patch_endpoint.check_negative_data(data)
+def test_patch_with_negative_data(create_test_response, update_object_endpoint, data):
+    update_object_endpoint.check_negative_data(data=data, method='PATCH')
 
 
 @allure.feature('Delete Object')
