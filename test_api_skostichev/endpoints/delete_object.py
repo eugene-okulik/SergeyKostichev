@@ -5,6 +5,7 @@ from test_api_skostichev.endpoints.endpoint import Endpoint
 
 class DeleteObject(Endpoint):
     template = "{0}/object/{1}"
+
     @allure.step('Delete an object using DELETE method')
     def delete_object(self, test_object):
         test_object_id = test_object.json()["id"]

@@ -52,12 +52,14 @@ def test_put_object(create_test_response, update_object_endpoint, data):
     update_object_endpoint.check_specific_parameter('name', data['name'])
     update_object_endpoint.check_response_time(max_time=2)
 
+
 @pytest.mark.parametrize('data', NEGATIVE_DATA)
 @allure.feature('Update Object')
 @allure.story('Invalid Object Update')
 @allure.title('Test PUT object update with negative data')
 def test_put_object_with_negative_data(create_test_response, update_object_endpoint, data):
     update_object_endpoint.check_negative_data(data=data, method='PUT')
+
 
 @pytest.mark.parametrize('data', TEST_DATA)
 @allure.feature('Update Object')
@@ -70,6 +72,7 @@ def test_patch_object(create_test_response, update_object_endpoint, data):
     update_object_endpoint.check_response_structure(EXPECTED_KEYS)
     update_object_endpoint.check_specific_parameter('name', data['name'])
     update_object_endpoint.check_response_time(max_time=2)
+
 
 @pytest.mark.parametrize('data', NEGATIVE_DATA)
 @allure.feature('Update Object')
