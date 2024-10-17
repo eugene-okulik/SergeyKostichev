@@ -9,5 +9,6 @@ class HTTPMethod:
     headers = {"Content-Type": "application/json"}
     default_data = {"name": "Pencil", "data": {"color": "transparent", "size": "XXL"}}
 
+    @allure.step("Deleting object")
     def delete_object(self, object_id):
         requests.delete(f"{self.url}/object/{object_id}")

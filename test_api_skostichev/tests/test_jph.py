@@ -37,6 +37,7 @@ def test_post_object(create_post_endpoint, data):
 @allure.title('Test POST object creation with negative data')
 def test_post_with_negative_data(create_post_endpoint, data):
     create_post_endpoint.check_status_request_400(data=data)
+    create_post_endpoint.delete_object(create_post_endpoint.response)
 
 
 @allure.feature('Update Object')
