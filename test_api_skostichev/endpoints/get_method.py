@@ -22,9 +22,7 @@ class GETMethod(HTTPMethod):
     def check_response_values(self, expected_data):
         response_json = self.response.json()
         for key, expected_value in expected_data.items():
-            assert response_json[
-                       key] == expected_value, \
-                f"Expected value for '{key}' is '{expected_value}', got '{response_json[key]}'"
+            assert response_json[key] == expected_value, f"Actual value of '{key}' is '{response_json[key]}'"
 
     @allure.step('Check response structure')
     def check_response_structure(self, expected_keys):
@@ -34,5 +32,4 @@ class GETMethod(HTTPMethod):
 
     @allure.step('Check response time')
     def check_response_time(self, max_time):
-        assert self.response.elapsed.total_seconds() < max_time, \
-            f"Response took too long: {self.response.elapsed.total_seconds()} seconds"
+        assert self.response.elapsed.total_seconds() < max_time, f"Response took too long time"
