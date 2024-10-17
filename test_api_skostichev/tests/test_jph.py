@@ -1,6 +1,6 @@
 import pytest
 import allure
-from test_api_skostichev.conftest import create_post_endpoint
+
 
 TEST_DATA = [
     {"name": "Pencil", "data": {"color": "transparent", "size": "XXL"}},
