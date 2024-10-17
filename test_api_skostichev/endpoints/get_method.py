@@ -32,4 +32,4 @@ class GETMethod(HTTPMethod):
 
     @allure.step('Check response time')
     def check_response_time(self, max_time):
-        assert self.response.elapsed.total_seconds() < max_time, "Response took too long time"
+        assert self.response.elapsed.total_seconds() < max_time, "Response took too much time"
