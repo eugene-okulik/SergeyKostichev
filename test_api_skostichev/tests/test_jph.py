@@ -28,6 +28,7 @@ def test_post_object(create_post_endpoint, data):
     create_post_endpoint.check_response_structure(EXPECTED_KEYS)
     create_post_endpoint.check_specific_parameter('name', data['name'])
     create_post_endpoint.check_response_time(max_time=2)
+    create_post_endpoint.delete_object(create_post_endpoint.response)
 
 
 @allure.feature('Create Object')
