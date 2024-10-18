@@ -9,10 +9,6 @@ class GetObject(Endpoint):
         self.response = requests.get(f'{self.url}/object/{test_object.json()["id"]}')
         return self.response
 
-    @allure.step('Check success status code')
-    def check_success(self):
-        assert self.response.status_code == 200, f"Unexpected status code: {self.response.status_code}"
-
     @allure.step('Check for 404 status code when object does not exist')
     def check_not_found(self, object_id):
         self.response = requests.get(f'{self.url}/object/{object_id}')
@@ -29,11 +25,3 @@ class GetObject(Endpoint):
         response_json = self.response.json()
         for key in expected_keys:
             assert key in response_json, f"Key '{key}' not found in response"
-
-    @allure.step('Check response time')
-    def check_response_time(self, max_time):
-        assert self.response.elapsed.total_seconds() < max_time, "Response took too much time"
-
-    @allure.step("Deleting object")
-    def delete_object(self, object_id):
-        requests.delete(f"{self.url}/object/{object_id}")

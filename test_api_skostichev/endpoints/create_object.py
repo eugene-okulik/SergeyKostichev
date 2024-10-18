@@ -17,10 +17,6 @@ class CreateObject(Endpoint):
         for parameter_key, parameter_value in data.items():
             assert self.response.json()[parameter_key] == parameter_value, "Value of the created object is wrong"
 
-    @allure.step('Check success status code')
-    def check_success(self):
-        assert self.response.status_code in [200, 201], f"Unexpected status code: {self.response.status_code}"
-
     @allure.step('Check response content type')
     def check_content_type(self):
         assert self.response.headers['Content-Type'] == 'application/json', "Incorrect Content-Type"
@@ -42,12 +38,3 @@ class CreateObject(Endpoint):
     def check_specific_parameter(self, key, expected_value):
         assert self.response.json()[key] == expected_value, \
             f"Value for '{key}' is wrong: '{self.response.json()[key]}'"
-
-    @allure.step('Check response time')
-    def check_response_time(self, max_time):
-        assert self.response.elapsed.total_seconds() < max_time, \
-            f"Response took too much time: {self.response.elapsed.total_seconds()} seconds"
-
-    @allure.step("Deleting object")
-    def delete_object(self, object_id):
-        requests.delete(f"{self.url}/object/{object_id}")
