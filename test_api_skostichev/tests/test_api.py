@@ -51,6 +51,7 @@ def test_put_object(create_test_response, full_update_object_endpoint, data):
     full_update_object_endpoint.check_specific_parameter('name', data['name'])
     full_update_object_endpoint.check_response_time(max_time=2)
 
+
 @pytest.mark.parametrize('data', NEGATIVE_DATA)
 @allure.feature('Update Object')
 @allure.story('Invalid Object Update')
@@ -72,6 +73,7 @@ def test_patch_object(create_test_response, part_update_object_endpoint, data):
     part_update_object_endpoint.check_specific_parameter('name', data['name'])
     part_update_object_endpoint.check_response_time(max_time=2)
 
+
 @pytest.mark.parametrize('data', NEGATIVE_DATA)
 @allure.feature('Update Object')
 @allure.story('Invalid Object Partial Update')
@@ -79,7 +81,6 @@ def test_patch_object(create_test_response, part_update_object_endpoint, data):
 def test_patch_with_negative_data(create_test_response, part_update_object_endpoint, data):
     part_update_object_endpoint.patch_object(create_test_response, data=data)
     part_update_object_endpoint.check_response_4xx()
-
 
 
 @allure.feature('Delete Object')

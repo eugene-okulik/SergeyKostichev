@@ -4,6 +4,7 @@ from test_api_skostichev.endpoints.get_object import GetObject
 from test_api_skostichev.endpoints.create_object import CreateObject
 from test_api_skostichev.endpoints.update_object import FullUpdateObject, PartUpdateObject
 
+
 @pytest.fixture()
 def create_post_endpoint():
     return CreateObject()
