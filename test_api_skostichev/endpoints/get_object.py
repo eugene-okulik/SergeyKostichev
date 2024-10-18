@@ -5,8 +5,12 @@ from test_api_skostichev.endpoints.endpoint import Endpoint
 
 class GetObject(Endpoint):
     @allure.step('Retrieve an object using GET method')
-    def get_object(self, test_object):
-        self.response = requests.get(f'{self.url}/object/{test_object.json()["id"]}')
+    def get_object(self, test_object=None, test_id=None):
+        if test_object:
+            test_id = test_object.json()["id"]
+        else:
+            test_id = test_id
+        self.response = requests.get(f'{self.url}/object/{test_id}')
         return self.response
 
     @allure.step('Check for 404 status code when object does not exist')

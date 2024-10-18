@@ -19,5 +19,4 @@ class DeleteObject(Endpoint):
     def verify_object_deleted(self, test_object):
         test_object_id = test_object.json()["id"]
         response = requests.get(self.template.format(self.url, test_object_id))
-        assert response.status_code == 404, \
-            f"Object with ID {test_object_id} was not deleted"
+        assert response.status_code == 404, f"Unexpected status code: {response.status_code}"

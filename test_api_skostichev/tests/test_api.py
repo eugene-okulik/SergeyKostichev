@@ -36,7 +36,8 @@ def test_post_object(create_post_endpoint, delete_endpoint, data):
 @allure.story('Invalid Object Creation')
 @allure.title('Test POST object creation with negative data')
 def test_post_with_negative_data(create_post_endpoint, data):
-    create_post_endpoint.check_status_request_400(data=data)
+    create_post_endpoint.create_new_object(data=data)
+    create_post_endpoint.check_response_400()
 
 
 @pytest.mark.parametrize('data', TEST_DATA)
@@ -58,7 +59,7 @@ def test_put_object(create_test_response, full_update_object_endpoint, data):
 @allure.title('Test PUT object update with negative data')
 def test_put_object_with_negative_data(create_test_response, full_update_object_endpoint, data):
     full_update_object_endpoint.put_object(create_test_response, data=data)
-    full_update_object_endpoint.check_response_4xx()
+    full_update_object_endpoint.check_response_400()
 
 
 @pytest.mark.parametrize('data', TEST_DATA)
@@ -80,15 +81,18 @@ def test_patch_object(create_test_response, part_update_object_endpoint, data):
 @allure.title('Test PATCH object update with negative data')
 def test_patch_with_negative_data(create_test_response, part_update_object_endpoint, data):
     part_update_object_endpoint.patch_object(create_test_response, data=data)
-    part_update_object_endpoint.check_response_4xx()
+    part_update_object_endpoint.check_response_400()
 
 
 @allure.feature('Delete Object')
 @allure.title('Test DELETE object')
-def test_delete_object(create_test_response, delete_endpoint):
+def test_delete_object(create_test_response, delete_endpoint, create_get_endpoint):
     delete_endpoint.delete_object(create_test_response)
     delete_endpoint.check_success()
-    delete_endpoint.verify_object_deleted(create_test_response)
+
+    create_get_endpoint.get_object(create_test_response)
+    delete_endpoint.delete_object(create_test_response)
+    delete_endpoint.check_response_404()
 
 
 @allure.feature('Delete Object')
@@ -96,7 +100,7 @@ def test_delete_object(create_test_response, delete_endpoint):
 def test_delete_non_existent_object(delete_endpoint):
     fake_object = {"id": "999999"}
     delete_endpoint.delete_object(fake_object)
-    delete_endpoint.check_response_4xx()
+    delete_endpoint.check_response_404()
 
 
 @allure.feature('Retrieve Object')
@@ -116,4 +120,5 @@ def test_get_valid_object(create_test_response, create_get_endpoint):
 @allure.title('Test GET non-existent object')
 def test_get_nonexistent_object(create_get_endpoint):
     none_id = 999999
-    create_get_endpoint.check_not_found(none_id)
+    create_get_endpoint.get_object(test_id=none_id)
+    create_get_endpoint.check_response_404()
