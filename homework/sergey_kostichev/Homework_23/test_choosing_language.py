@@ -28,8 +28,6 @@ def test_choose_language(browser):
         select = Select(select_element)
         select.select_by_visible_text(language)
         # select.select_by_index(1)
-
-
     except Exception as e:
         print(f"An error occurred: {e}")
 

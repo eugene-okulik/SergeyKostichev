@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
+
 def open_browser(link):
     options = Options()
     options.add_argument('start-maximized')
@@ -9,6 +10,7 @@ def open_browser(link):
     browser = webdriver.Chrome(options=options)
     browser.get(link)
     return browser
+
 
 driver = open_browser('https://www.qa-practice.com/elements/input/simple')
 input_field = driver.find_element(By.NAME, 'text_string')
