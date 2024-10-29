@@ -20,9 +20,8 @@ def browser():
 
 
 def test_choose_language(browser):
-    driver = browser
     try:
-        select_element = WebDriverWait(driver, 10).until(
+        select_element = WebDriverWait(browser, 10).until(
             ec.presence_of_element_located((By.ID, 'id_choose_language'))
         )
         select = Select(select_element)
@@ -31,8 +30,8 @@ def test_choose_language(browser):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-    submit_button = driver.find_element(By.ID, 'submit-id-submit')
+    submit_button = browser.find_element(By.ID, 'submit-id-submit')
     submit_button.click()
 
-    result = driver.find_element(By.ID, 'result').text
+    result = browser.find_element(By.ID, 'result').text
     assert language in result, f"Wrong result: {result}"

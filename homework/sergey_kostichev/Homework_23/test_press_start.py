@@ -21,13 +21,12 @@ def browser():
 
 
 def test_hello_world(browser):
-    driver = browser
-    start_button = WebDriverWait(driver, 10).until(
+    start_button = WebDriverWait(browser, 10).until(
         ec.element_to_be_clickable((By.XPATH, "//button[text()='Start']"))
     )
     start_button.click()
 
-    finish_label = WebDriverWait(driver, 10).until(
+    finish_label = WebDriverWait(browser, 10).until(
         ec.presence_of_element_located((By.ID, 'finish'))
     )
     assert text in finish_label.text, f"Wrong result: {finish_label}"
