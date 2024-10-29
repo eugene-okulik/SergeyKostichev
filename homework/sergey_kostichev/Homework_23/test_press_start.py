@@ -14,7 +14,7 @@ text = 'Hello World'
 def browser():
     options = Options()
     options.add_argument('--force-device-scale-factor=0.5')
-    options.add_experimental_option('detach', True)
+    #  options.add_experimental_option('detach', True)
     browser = webdriver.Chrome(options=options)
     browser.get('https://the-internet.herokuapp.com/dynamic_loading/2')
     return browser
