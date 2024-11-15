@@ -22,4 +22,3 @@ def test_fill_out_form(page: Page):
     city_field.click()
     city_field.press_sequentially("Delhi")
     city_field.press('Enter')
-    time.sleep(20)
