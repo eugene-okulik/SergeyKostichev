@@ -1,6 +1,4 @@
 from playwright.sync_api import Page, expect
-import time
-
 
 
 def test_fill_out_form(page: Page):
