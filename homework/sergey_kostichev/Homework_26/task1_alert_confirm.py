@@ -8,6 +8,3 @@ def test_alert(page: Page):
     page.goto('https://www.qa-practice.com/elements/alert/confirm')
     page.get_by_role('link', name='Click').click()
     expect(page.locator('#result-text'), "Dialog was not accepted").to_have_text('Ok')
-
-
-
