@@ -87,7 +87,6 @@ class CollectionsPage(BasePage):
             "size_and_colors": size_and_colors,
         }
 
-
     def __verify_product_in_cart(self, product_name, product_price):
         cart_data_block = self.page.locator(loc.cart_data_block_loc)
         expect(cart_data_block).to_be_visible(timeout=10000)

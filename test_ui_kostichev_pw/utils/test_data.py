@@ -2,6 +2,7 @@ from faker import Faker
 
 fake = Faker()
 
+
 def generate_account_data(fields):
     password = fake.password()
     data = {

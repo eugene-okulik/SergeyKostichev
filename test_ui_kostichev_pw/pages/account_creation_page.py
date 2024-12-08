@@ -45,7 +45,6 @@ class CreationAccount(BasePage):
                 error_element_id = f"#{field_name}-error"
                 expect(self.page.locator(error_element_id)).to_have_text('This is a required field.')
 
-
         if all(field_flags.values()):
             assert self.__get_success_text() == "Thank you for registering with Main Website Store.", \
                 "Invalid answer when all fields are True"
@@ -54,6 +53,7 @@ class CreationAccount(BasePage):
         self.__get_all_fields()
         account_data = generate_account_data(None)
         for key, field in self.fields.items():
-                field.fill(account_data[key])
+            field.fill(account_data[key])
         self.find(loc.create_account_button_loc).click()
-        expect(self.page.locator(f"{loc.password_confirmation_field_loc}-error")).to_have_text('Please enter the same value again.')
+        expect(self.page.locator(f"{loc.password_confirmation_field_loc}-error")).to_have_text(
+            'Please enter the same value again.')
