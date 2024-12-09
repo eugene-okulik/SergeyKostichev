@@ -21,7 +21,7 @@ class CreationAccount(BasePage):
     def __get_success_text(self):
         return self.find(success_message_locator).text_content()
 
-    def check_filling_required_fields(self, field_flags, account_data):
+    def check_filling_required_fields(self, field_flags, account_data, success_msg, fail_msg):
         self.__get_all_fields()
         for key, field in self.fields.items():
             if field_flags[key]:
@@ -34,8 +34,7 @@ class CreationAccount(BasePage):
                 expect(self.page.locator(error_element_id)).to_have_text('This is a required field.')
 
         if all(field_flags.values()):
-            assert self.__get_success_text() == "Thank you for registering with Main Website Store.", \
-                "Invalid answer when all fields are True"
+            assert self.__get_success_text() == success_msg, fail_msg
 
     def check_mismatching_password(self, message):
         self.__get_all_fields()
@@ -45,3 +44,5 @@ class CreationAccount(BasePage):
         self.find(loc.create_account_button_loc).click()
         expect(self.page.locator(f"{loc.password_confirmation_field_loc}-error")).to_have_text(
             message)
+
+
