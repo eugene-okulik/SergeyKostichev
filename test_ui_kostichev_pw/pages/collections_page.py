@@ -11,7 +11,7 @@ class CollectionsPage(BasePage):
         super().__init__(browser)
         self.page_url = '/collections/eco-friendly.html'
 
-    def take_a_random_product(self):
+    def __take_a_random_product(self):
         products = self.take_a_list_of_items()
         product_count = products.count()
         random_index = random.randint(0, product_count - 1)
@@ -36,37 +36,42 @@ class CollectionsPage(BasePage):
         initial_count_text = self.find(loc.page_cart_counter_loc).text_content()
         return int(initial_count_text) if initial_count_text.isdigit() else 0
 
-    def add_to_cart(self, size_and_colors=True):
-        random_product_info = self.take_a_random_product()
+    @staticmethod
+    def __set_random_color(product):
+        colors_locator = product.locator(loc.product_colors)
+        color_count = colors_locator.count()
+        if color_count > 0:
+            random_color_index = random.randint(0, color_count - 1)
+            random_color = colors_locator.nth(random_color_index)
+            random_color.click()
+
+    @staticmethod
+    def __set_random_size(product):
+        sizes_locator = product.locator(loc.product_sizes)
+        size_count = sizes_locator.count()
+        if size_count > 0:
+            random_size_index = random.randint(0, size_count - 1)
+            random_size = sizes_locator.nth(random_size_index)
+            random_size.click()
+
+    def add_random_product_to_cart(self, size_and_colors):
+        random_product_info = self.__take_a_random_product()
         random_product = random_product_info['element']
-        product_name = random_product_info['name'].strip()
-        product_price = random_product_info['price']
 
         if size_and_colors:
-            sizes_locator = random_product.locator(loc.product_sizes)
-            size_count = sizes_locator.count()
-            if size_count > 0:
-                random_size_index = random.randint(0, size_count - 1)
-                random_size = sizes_locator.nth(random_size_index)
-                random_size.click()
-
-            colors_locator = random_product.locator(loc.product_colors)
-            color_count = colors_locator.count()
-            if color_count > 0:
-                random_color_index = random.randint(0, color_count - 1)
-                random_color = colors_locator.nth(random_color_index)
-                random_color.click()
+            self.__set_random_color(random_product)
+            self.__set_random_size(random_product)
 
         random_product.hover()
-
         add_to_cart_button = random_product.locator(loc.add_to_cart_loc)
+        add_to_cart_button.click()
+        return random_product_info
 
-        try:
-            add_to_cart_button.click()
-        except Exception:
-            add_to_cart_button.click(force=True)
-
-        if size_and_colors:
+    def verify_product_name_in_cart(self, size_and_color=True):
+        product_info = self.add_random_product_to_cart(size_and_color)
+        product_name = product_info['name'].strip()
+        product_price = product_info['price']
+        if size_and_color:
             success_message_locator = self.page.locator(loc.success_message_loc)
             expect(success_message_locator).to_be_visible(timeout=10000)
             success_message_text = success_message_locator.locator("div").text_content().strip()
@@ -80,27 +85,6 @@ class CollectionsPage(BasePage):
             alert_message_text = alert_message_locator.locator("div").text_content().strip()
             expected_alert_message = "You need to choose options for your item."
             assert alert_message_text == expected_alert_message, f"Unexpected alert message: {alert_message_text}"
-
-        return {
-            "name": product_name,
-            "price": product_price,
-            "size_and_colors": size_and_colors,
-        }
-
-    def __verify_product_in_cart(self, product_name, product_price):
-        cart_data_block = self.page.locator(loc.cart_data_block_loc)
-        expect(cart_data_block).to_be_visible(timeout=10000)
-
-        cart_name_locator = cart_data_block.locator(loc.inside_cart_product_name_loc)
-        cart_price_locator = cart_data_block.locator(loc.inside_cart_product_price_loc)
-
-        cart_name = cart_name_locator.text_content().strip()
-        cart_price = cart_price_locator.text_content().strip()
-
-        if cart_name == product_name and cart_price == product_price:
-            print(f"Product matched: {cart_name}, Price: {cart_price}")
-            return True
-        return False
 
     def switch_sorter_to(self, sort_option):
         while True:

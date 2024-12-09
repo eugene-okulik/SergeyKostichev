@@ -44,5 +44,3 @@ class CreationAccount(BasePage):
         self.find(loc.create_account_button_loc).click()
         expect(self.page.locator(f"{loc.password_confirmation_field_loc}-error")).to_have_text(
             message)
-
-
