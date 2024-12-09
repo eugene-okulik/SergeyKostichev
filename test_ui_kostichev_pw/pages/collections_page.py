@@ -70,7 +70,7 @@ class CollectionsPage(BasePage):
     def verify_product_name_in_cart(self, size_and_color=True):
         product_info = self.add_random_product_to_cart(size_and_color)
         product_name = product_info['name'].strip()
-        product_price = product_info['price']
+        #  product_price = product_info['price']
         if size_and_color:
             success_message_locator = self.page.locator(loc.success_message_loc)
             expect(success_message_locator).to_be_visible(timeout=10000)

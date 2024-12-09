@@ -28,5 +28,3 @@ def validate_field_flags(first_name=True, last_name=True, email=True, password=T
         'password-confirmation': password_confirmation
     }
     return field_flags
-
-
