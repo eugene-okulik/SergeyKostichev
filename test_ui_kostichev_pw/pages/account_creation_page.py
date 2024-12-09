@@ -21,25 +21,13 @@ class CreationAccount(BasePage):
     def __get_success_text(self):
         return self.find(success_message_locator).text_content()
 
-    def fill_in_account_form_properly(self, first_name=True, last_name=True, email=True, password=True,
-                                      password_confirmation=True):
+    def check_filling_required_fields(self, field_flags, account_data):
         self.__get_all_fields()
-        field_flags = {
-            'firstname': first_name,
-            'lastname': last_name,
-            'email': email,
-            'password': password,
-            'password-confirmation': password_confirmation
-        }
-
-        account_data = generate_account_data(field_flags)  # generating fake datas
-
         for key, field in self.fields.items():
             if field_flags[key]:
                 field.fill(account_data[key])
 
         self.find(loc.create_account_button_loc).click()
-
         for field_name, flag in field_flags.items():
             if not flag:
                 error_element_id = f"#{field_name}-error"
