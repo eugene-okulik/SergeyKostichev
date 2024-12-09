@@ -49,11 +49,11 @@ class CreationAccount(BasePage):
             assert self.__get_success_text() == "Thank you for registering with Main Website Store.", \
                 "Invalid answer when all fields are True"
 
-    def fill_in_form_with_mismatching_password(self):
+    def check_mismatching_password(self, message):
         self.__get_all_fields()
         account_data = generate_account_data(None)
         for key, field in self.fields.items():
             field.fill(account_data[key])
         self.find(loc.create_account_button_loc).click()
         expect(self.page.locator(f"{loc.password_confirmation_field_loc}-error")).to_have_text(
-            'Please enter the same value again.')
+            message)
