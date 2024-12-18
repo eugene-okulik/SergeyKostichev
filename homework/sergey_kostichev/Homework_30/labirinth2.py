@@ -7,7 +7,7 @@ START_POINT = 'o'
 EXIT_POINT = 'X'
 
 
-def walk(row: int, col: int) -> bool:  
+def walk(row: int, col: int) -> bool:
     f"""
     Эта функция начинает выполнение с указанных параметров row и col и
     продолжает выполнение до тех пор, пока не найдет последний элемент, обозначенный символом {EXIT_POINT}.
