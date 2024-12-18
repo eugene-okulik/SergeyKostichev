@@ -1,0 +1,26 @@
+Go to first line in file: g
+Go to last line in file: G
+
+Forward one window:   f  ^F  ^V  SPACE
+
+Forward one line: e  ^E  j  ^N  CR
+Backward one line: y  ^Y  k  ^K  ^P
+
+Search forward for matching line: /pattern
+Search backward for matching line: ?pattern
+
+Repeat previous search: n
+Repeat previous search in reverse direction: N
+
+
+/dev/null 	символьное устройство crw-rw-rw- 
+/dev/zero 	символьное устройство crw-rw-rw-
+
+/dev/sda	No such file or directory
+
+/dev/tty 	символьное устройство crw-rw-rw-
+/root 		directory
+/etc/passwd 	Файл -rw-r--r--
+/proc/mounts 	символьная ссылка - ярлык lrwxrwxrwx
+/bin/ls		файл -rwxr-xr-x
+/bin/zcat	файл -rwxr-xr-x
